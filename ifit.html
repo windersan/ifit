@@ -1,299 +1,470 @@
 ﻿<!DOCTYPE html>
-<!--
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
--->
-<html lang="en" >
-    <head>
-        <title>iFit</title>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link  href="css/styles.css"  rel="stylesheet" type="text/css" >
-        <script src="js/scripts.js" type="text/javascript"></script>
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+<html lang="en">
+<head>
+    <title>iFit</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="css/styles.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="js/scripts.js" type="text/javascript"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.6/angular-route.js"></script>
 
-          
-    <!-- Latest compiled and minified CSS -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
-<!-- Optional theme -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
-<!-- Latest compiled and minified JavaScript -->
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.6/angular-route.js"></script>
+    <style>
+        .parallax {
+            /* The image used */
+            background-image: url("img/hero_img.png");
+            /* Set a specific height */
+            min-height: 700px;
+            /* Create the parallax scrolling effect */
+            background-attachment: fixed;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+    </style>
+</head>
 
+<body>
 
+    <aside id="menu" style="z-index:2;position:fixed;right:0px;width:22%;opacity:.9;background-color:black;padding:8px;display:none">
 
+        <h4 style="color: gray;font-weight:bold;" onmouseover="this.style.color = 'white'"
+            onmouseout="this.style.color = 'gray'">
+            HOME
+        </h4>
+        <h4 style="color: gray;font-weight:bold;" onmouseover="this.style.color = 'white'"
+            onmouseout="this.style.color = 'gray'">
+            FEATURES
+        </h4>
 
-        <style>
-            .parallax {
-                /* The image used */
-                background-image: url("img/hero_img.png");
-                /* Set a specific height */
-                min-height: 700px;
-                /* Create the parallax scrolling effect */
-                background-attachment: fixed;
-                background-position: center;
-                background-repeat: no-repeat;
-                background-size: cover;
+        <h4 id="trainingGray" style="color: gray;font-weight:bold;" onmouseover="whitenTraining()">
+            TRAINING <img id="grayArrow" src="img/down_arrow_gray.png" />
+        </h4>
+        <h4 onclick="toggleTraining()" id="trainingWhite" style="color: white;font-weight:bold;display:none"
+            onmouseout="grayTraining()">
+            TRAINING <img id="whiteArrow" src="img/down_arrow_white.png" />
+        </h4>
+        <script>
+            function whitenTraining() {
+                var x = document.getElementById('trainingGray');
+                x.style.display = 'none';
+                var y = document.getElementById('trainingWhite');
+                y.style.display = 'block';
             }
-        </style>
+            function grayTraining() {
+                var x = document.getElementById('trainingGray');
+                x.style.display = 'block';
+                var y = document.getElementById('trainingWhite');
+                y.style.display = 'none';
+            }
+        </script>
 
+        <div id="trainingList" style="opacity:1 ;z-index:3;background-color:black">
+            <p style="color:gray" onmouseover="this.style.color = 'white'"
+               onmouseout="this.style.color = 'gray'">&nbsp; &nbsp; Weight Loss</p>
+            <p style="color:gray" onmouseover="this.style.color = 'white'"
+               onmouseout="this.style.color = 'gray'">&nbsp; &nbsp; Running</p>
+            <p style="color:gray" onmouseover="this.style.color = 'white'"
+               onmouseout="this.style.color = 'gray'">&nbsp; &nbsp; Cycling</p>
+            <p style="color:gray" onmouseover="this.style.color = 'white'"
+               onmouseout="this.style.color = 'gray'">&nbsp; &nbsp; Fitness</p>
+            <p style="color:gray" onmouseover="this.style.color = 'white'"
+               onmouseout="this.style.color = 'gray'">&nbsp; &nbsp; Walking</p>
+            <p style="color:gray" onmouseover="this.style.color = 'white'"
+               onmouseout="this.style.color = 'gray'">&nbsp; &nbsp; Personal Training</p>
+            <p style="color:gray" onmouseover="this.style.color = 'white'"
+               onmouseout="this.style.color = 'gray'">&nbsp; &nbsp; Daily Workout</p>
+        </div>
+        <script>
+            function toggleTraining() {
+                var x = document.getElementById('trainingList');
+                if (x.style.display != 'none') {
+                    x.style.display = 'none';
+                } else {
+                    x.style.display = 'block';
+                }
+            }
 
+        </script>
 
-       
+        <h4 id="shopGray" style="color: gray;font-weight:bold;" onmouseover="whitenShop()">
+            SHOP <img id="grayArrow" src="img/down_arrow_gray.png" />
+        </h4>
+        <h4 id="shopWhite" style="color: white;font-weight:bold;display:none"
+            onmouseout="grayShop()">
+            SHOP <img id="whiteArrow" src="img/down_arrow_white.png" />
+        </h4>
+        <script>
+            function whitenShop() {
+                var x = document.getElementById('shopGray');
+                x.style.display = 'none';
+                var y = document.getElementById('shopWhite');
+                y.style.display = 'block';
+            }
+            function grayShop() {
+                var x = document.getElementById('shopGray');
+                x.style.display = 'block';
+                var y = document.getElementById('shopWhite');
+                y.style.display = 'none';
+            }
+        </script>
 
+        <h4 style="color: gray;font-weight:bold;" onmouseover="this.style.color = 'white'"
+            onmouseout="this.style.color = 'gray'">
+            TIPS+VIDEOS <img id="grayArrow" src="img/down_arrow_gray.png" />
+        </h4>
+        <h4 style="color: gray;font-weight:bold;" onmouseover="this.style.color = 'white'"
+            onmouseout="this.style.color = 'gray'">
+            MY CART
+        </h4>
+        <button style="margin:10px; color:white">JOIN IFIT TODAY</button>
+    </aside>
 
-    </head>
+    <header>
+        <div style="padding:8px">
 
+            <img src="img/logo.png" alt="logo" id="logo">
+        </div>
+        <div id="menuClosed" style="text-align:right;">
+            <a href=http://main52.azurewebsites.net/Account/Login style="color:white">
+                LOGIN
+            </a>
 
-    <body>
+            <span style="padding-left:30px; ">
+                <a href=http://main52.azurewebsites.net/Account/Register style="color:white">
+                    SIGN UP
+                </a>
+            </span>
+            <span style="padding-left:30px; " onclick="openMenu()">
+                MENU
+            </span>
+            <span style="padding-right:50px" onclick="openMenu()">
+                <img src="img/menu_icon.png" />
+            </span>
+        </div>
 
-        <header>
-            
-            <div style="padding:8px">
+        <div id="menuOpen" style="text-align:right; display:none">
+            <a href=http://main52.azurewebsites.net/Account/Login style="color:white;">
+                LOGIN
+            </a>
+            <span style="padding-left:30px;" onclick="closeMenu()">
+                MENU
+            </span>
+            <span style="padding-right:25vw" onclick="closeMenu()">
+                <img src="img/menu_icon.png" />
+            </span>
+            <script>
+                function closeMenu() {
+                    var x = document.getElementById('menu');
+                    x.style.display = 'none';
+                    x = document.getElementById('menuOpen');
+                    x.style.display = 'none';
+                    x = document.getElementById('menuClosed');
+                    x.style.display = 'block';
+                }
+                function openMenu() {
+                    var x = document.getElementById('menu');
+                    x.style.display = 'block';
+                    x = document.getElementById('menuOpen');
+                    x.style.display = 'block';
+                    x = document.getElementById('menuClosed');
+                    x.style.display = 'none';
+                }
 
-                 <img src="img/logo.png" alt="logo" id="logo" >
-            </div>
-
-            <div style="text-align:right">
-                <a href=login.html style="color:white"> 
-                    LOGIN 
-                </a> 
-                
-                <span style="padding-left:30px; ">
-                    <a href=login.html style="color:white"> 
-                        SIGN UP 
-                    </a> 
-                </span>
-
-                <span style="padding-left:30px; padding-right: 20px; ">
-                    MENU 
-                </span>
-            
-            </div>
-
-             <nav>
-                <div style="font-weight:bold; font-size:150%">
-                    
+            </script>
+        </div>
+        <nav>
+            <div style="font-weight:bold; font-size:110%">
                 Weight Loss
-                
-                </div>
-                <div style="text-align: right;">
-                     <a href= overview.html style="color:gray;"
-                   onmouseover="this.style.color = 'black';this.style.fontWeight = 'bold';this.style.textDecoration='underline'"
-                   onmouseout="this.style.color = 'gray';this.style.fontWeight = 'normal';this.style.textDecoration='none'"> OVERVIEW </a>
+            </div>
+            <div style="text-align: right;">
+                <a href=overview.html style="color:gray;"
+                   onmouseover="this.style.color = 'black';this.style.fontWeight = 'bold';
+                               this.style.textDecoration = 'underline'"
+                   onmouseout="this.style.color = 'gray';
+                               this.style.fontWeight = 'normal';
+                               this.style.textDecoration = 'none'">OVERVIEW</a>
 
-                   <span style="padding-left:30px;">
-                       <a href= features.html style="color:gray;"
-                   onmouseover="this.style.color = 'black';this.style.fontWeight = 'bold';this.style.textDecoration='underline'"
-                   onmouseout="this.style.color = 'gray';this.style.fontWeight = 'normal';this.style.textDecoration='none'"> FEATURES </a>
+                <span style="padding-left:30px;">
+                    <a href=features.html style="color:gray;"
+                       onmouseover="this.style.color = 'black';
+                                   this.style.fontWeight = 'bold';this.style.textDecoration = 'underline'"
+                       onmouseout="this.style.color = 'gray';
+                                   this.style.fontWeight = 'normal';
+                                   this.style.textDecoration = 'none'">FEATURES</a>
                 </span>
 
                 <span style="padding-left:30px;">
-                    <a href= programs.html style="color:gray;"
-                        onmouseover="this.style.color = 'black';this.style.fontWeight = 'bold';this.style.textDecoration='underline'"
-                        onmouseout="this.style.color = 'gray';this.style.fontWeight = 'normal';this.style.textDecoration='none'"> PROGRAMS </a>
-                </span>    
-
-                <span style="padding-left:30px; ">
-                    <a href= training.html style="color:gray;"
-                        onmouseover="this.style.color = 'black';this.style.fontWeight = 'bold';this.style.textDecoration='underline'"
-                        onmouseout="this.style.color = 'gray';this.style.fontWeight = 'normal';this.style.textDecoration='none'"> TRAINING </a>
+                    <a href=programs.html style="color:gray;"
+                       onmouseover="this.style.color = 'black';
+                                   this.style.fontWeight = 'bold';
+                                   this.style.textDecoration = 'underline'"
+                       onmouseout="this.style.color = 'gray';this.style.fontWeight = 'normal';
+                                   this.style.textDecoration = 'none'">PROGRAMS</a>
                 </span>
 
+                <span style="padding-left:30px; ">
+                    <a href=training.html style="color:gray;"
+                       onmouseover="this.style.color = 'black';
+                                   this.style.fontWeight = 'bold';this.style.textDecoration = 'underline'"
+                       onmouseout="this.style.color = 'gray';
+                                   this.style.fontWeight = 'normal';
+                                   this.style.textDecoration = 'none'">TRAINING</a>
+                    <img style="padding-left:30px" src="img/search_icon.png" />
+                </span>
+            </div>
+        </nav>
+    </header>
 
-                </div>
-            </nav>
-        </header>
+    <main>
 
-       
+        <div class="parallax">
+            <div class="hero-text" id="herotext">
 
-        
+                <script src="~/js/jquery.js" type="text/javascript"></script>
+                <script type="text/javascript" typeof="text/javascript">
 
-        <main>
-
-            <div class="parallax"></div>
-           
-
-           
-            <div style="text-align: center;margin:20px;padding:40px;">
-                <h2 >
-                    Weight Loss
-                </h2></br>
-                <p style="text-align: center; margin-right:230px;margin-left:230px">
-                    Welcome to the center of it all.  The Fitness Shop presents you with hundreds of workout programs
-                    designed to guide your weight loss journey.
-                </p></br>
-
-                <div id="cards-all-rows" style="padding:60px;">
-
-                    <div class="w3-container" style="margin-bottom:30%">
-                        <div class="w3-card-4" style="width:25%;float:left">
-                            <img src="img/card1.png" alt="card1" style="width:90%">
-                            <div class="w3-container w3-center">
-                                <p style="font-weight:bold">Get Fit with Jillian Michaels</p>
-                                <p style="margin:-1em;font-style:italic;font-size:80%">weight loss</p>
-                            </div>
-                        </div>
-
-                        <div class="w3-card-4" style="width:25%;float:left">
-                            <img src="img/card2.png" alt="card2" style="width:90%">
-                            <div class="w3-container w3-center">
-                                <p style="font-weight:bold">Grand Canyon</p>
-                                <p style="margin:-1em;font-style:italic;font-size:80%">incline trainer</p>
-                            </div>
-                        </div>
-
-                        <div class="w3-card-4" style="width:25%;float:left">
-                            <img src="img/card3.png" alt="card3" style="width:90%">
-                            <div class="w3-container w3-center">
-                                <p style="font-weight:bold">Power Walk</p>
-                                <p style="margin:-1em;font-style:italic;font-size:80%">walking</p>
-                            </div>
-                        </div>
-
-                        <div class="w3-card-4" style="width:25%;float:left">
-                            <img src="img/card4.png" alt="card4" style="width:90%">
-                            <div class="w3-container w3-center">
-                                <p style="font-weight:bold">Elliptical Weight Loss</p>
-                                <p style="margin:-1em;font-style:italic;font-size:80%">weight loss</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="w3-container" style="margin-bottom:60%">
-                        <div class="w3-card-4" style="width:25%;float:left">
-                            <img src="img/card5.png" alt="card5" style="width:90%">
-                            <div class="w3-container w3-center">
-                                <p style="font-weight:bold">Off Season Weight Loss</p>
-                                <p style="margin:-1em;font-style:italic;font-size:80%">cycling</p>
-                            </div>
-                        </div>
-
-                        <div class="w3-card-4" style="width:25%;float:left">
-                            <img src="img/card6.png" alt="card6" style="width:90%">
-                            <div class="w3-container w3-center">
-                                <p style="font-weight:bold">Central Park</p>
-                                <p style="margin:-1em;font-style:italic;font-size:80%">fitness</p>
-                            </div>
-                        </div>
-
-                        <div class="w3-card-4" style="width:25%;float:left">
-                            <img src="img/card7.png" alt="card7" style="width:90%">
-                            <div class="w3-container w3-center">
-                                <p style="font-weight:bold">5k Beginner Training</p>
-                                <p style="margin:-1em;font-style:italic;font-size:80%">running</p>
-                            </div>
-                        </div>
-
-                        <div class="w3-card-4" style="width:25%;float:left">
-                            <img src="img/card8.png" alt="card8" style="width:90%">
-                            <div class="w3-container w3-center">
-                                <p style="font-weight:bold">Going Coastal</p>
-                                <p style="margin:-1em;font-style:italic;font-size:80%">running</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="w3-container" style="margin-bottom:90%">
-                        <div class="w3-card-4" style="width:25%;float:left">
-                            <img src="img/card9.png" alt="card9" style="width:90%">
-                            <div class="w3-container w3-center">
-                                <p style="font-weight:bold">Elliptical Weight Loss</p>
-                                <p style="margin:-1em;font-style:italic;font-size:80%">weight loss</p>
-                            </div>
-                        </div>
-
-                        <div class="w3-card-4" style="width:25%;float:left">
-                            <img src="img/card10.png" alt="card10" style="width:90%">
-                            <div class="w3-container w3-center">
-                                <p style="font-weight:bold">Incline Train</p>
-                                <p style="margin:-1em;font-style:italic;font-size:80%">incline trainer</p>
-                            </div>
-                        </div>
-
-                        <div class="w3-card-4" style="width:25%;float:left">
-                            <img src="img/card11.png" alt="card11" style="width:90%">
-                            <div class="w3-container w3-center">
-                                <p style="font-weight:bold">Paris</p>
-                                <p style="margin:-1em;font-style:italic;font-size:80%">running</p>
-                            </div>
-                        </div>
-
-                        <div class="w3-card-4" style="width:25%;float:left">
-                            <img src="img/card12.png" alt="card12" style="width:90%">
-                            <div class="w3-container w3-center">
-                                <p style="font-weight:bold">Lose Weight with Jillian Michaels</p>
-                                <p style="margin:-1em;font-style:italic;font-size:80%">weight loss</p>
-                            </div>
-                        </div>
-                    </div>
-
-                  
+                    $(function () {
                     
-              <div style="text-align:center; clear:both;margin:5px;">
-                <button style="text-align:center;margin:15px; color:white;  clear:both;">VIEW MORE</button>
-                  </div>
+                        
+
+                       
+                        $('#herotext').fadeOut(5000).fadeIn(5000).fadeOut(5000).fadeIn(5000)
+                            .fadeOut(5000).fadeIn(5000).fadeOut(5000).fadeIn(5000).fadeOut(5000).fadeIn(5000)
+                            .fadeOut(5000).fadeIn(5000).fadeOut(5000).fadeIn(5000).fadeOut(5000).fadeIn(5000)
+                            .fadeOut(5000).fadeIn(5000).fadeOut(5000).fadeIn(5000).fadeOut(5000).fadeIn(5000)
+                            .fadeOut(5000).fadeIn(5000).fadeOut(5000).fadeIn(5000).fadeOut(5000).fadeIn(5000)
+                            .fadeOut(5000).fadeIn(5000).fadeOut(5000).fadeIn(5000).fadeOut(5000).fadeIn(5000)
+                            .fadeOut(5000).fadeIn(5000).fadeOut(5000).fadeIn(5000).fadeOut(5000).fadeIn(5000)
+                            .fadeOut(5000).fadeIn(5000).fadeOut(5000).fadeIn(5000).fadeOut(5000).fadeIn(5000)
+                            .fadeOut(5000).fadeIn(5000).fadeOut(5000).fadeIn(5000).fadeOut(5000).fadeIn(5000)
+                            .fadeOut(5000).fadeIn(5000).fadeOut(5000).fadeIn(5000).fadeOut(5000).fadeIn(5000);
+                            
+                        
+
+                    });
+
+                </script>
+
+                <h2 style="text-align:left;margin:-5px">WORKING OUT</h2>
+                <h2 style="text-align:left;margin:-5px">HAS NEVER BEEN SO FUN</h2><br />
+                <p style="text-align:left;margin:-3px;">Welcome to the center of it all. The Fitness Shop</p>
+                <p style="text-align:left;margin:-3px;">presents you with hundreds of workout programs</p>
+                <p style="text-align:left">designed to guide your weight loss journey.</p>
 
 
             </div>
+        </div>
 
 
 
+        <div style="text-align: center;margin:20px;padding:40px;">
+            <h2>
+                Weight Loss
+            </h2></br>
+            <p style="text-align: center; margin-right:230px;margin-left:230px">
+                Welcome to the center of it all.  The Fitness Shop presents you with hundreds of workout programs
+                designed to guide your weight loss journey.
+            </p></br>
 
-            <div style="background-color: black; padding:20px;text-align:center">
-            <div style="background-color: black; color:white; margin:40px">
-                
-              
-                <blockquote style="border-left-color:black;text-align:center"><h3>To date I have lost 14 Kilos (30 pounds) and my fitness level is at least the same as
-                    when I was actively engaged in sport (if not better), thanks to iFit and the range and variation 
-                    of fitness programs available.</h3>
+            <div id="cards-all-rows" style="padding:60px;">
+
+                <script type="text/javascript" typeof="text/javascript">
+                    $(function () {
+
+
+                        window.onscroll = function () { myFunction() };
+
+                        function myFunction() {
+                            if (document.body.scrollTop > 350 || document.documentElement.scrollTop > 350) {
+                                $('#cards-all-rows').fadeOut(1000).fadeIn(5000);
+                            }
+                        }
+
+
+                            
+                        
+                    });
+                </script>
+
+
+                <div class="w3-container" style="margin-bottom:30%">
+                    <div class="w3-card-4" style="width:25%;float:left">
+
+
+                        <img src="img/card1.png" alt="card2" style="width:90%">
+                        <div class="w3-container w3-center">
+                            <p style="font-weight:bold">Power Walk</p>
+                            <p style="margin:-1em;font-style:italic;font-size:80%">walking</p>
+                        </div>
+
+
+
+                    </div>
+
+                    <div class="w3-card-4" style="width:25%;float:left">
+                        <img src="img/card2.png" alt="card2" style="width:90%">
+                        <div class="w3-container w3-center">
+                            <p style="font-weight:bold">Power Walk</p>
+                            <p style="margin:-1em;font-style:italic;font-size:80%">walking</p>
+                        </div>
+                    </div>
+
+
+                    <div class="w3-card-4" style="width:25%;float:left">
+                        <img src="img/card3.png" alt="card3" style="width:90%">
+                        <div class="w3-container w3-center">
+                            <p style="font-weight:bold">Power Walk</p>
+                            <p style="margin:-1em;font-style:italic;font-size:80%">walking</p>
+                        </div>
+                    </div>
+
+                    <div class="w3-card-4" style="width:25%;float:left">
+                        <img src="img/card4.png" alt="card4" style="width:90%">
+                        <div class="w3-container w3-center">
+                            <p style="font-weight:bold">Elliptical Weight Loss</p>
+                            <p style="margin:-1em;font-style:italic;font-size:80%">weight loss</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="w3-container" style="margin-bottom:60%">
+                    <div class="w3-card-4" style="width:25%;float:left">
+                        <img src="img/card5.png" alt="card5" style="width:90%">
+                        <div class="w3-container w3-center">
+                            <p style="font-weight:bold">Off Season Weight Loss</p>
+                            <p style="margin:-1em;font-style:italic;font-size:80%">cycling</p>
+                        </div>
+                    </div>
+
+                    <div class="w3-card-4" style="width:25%;float:left">
+                        <img src="img/card6.png" alt="card6" style="width:90%">
+                        <div class="w3-container w3-center">
+                            <p style="font-weight:bold">Central Park</p>
+                            <p style="margin:-1em;font-style:italic;font-size:80%">fitness</p>
+                        </div>
+                    </div>
+
+                    <div class="w3-card-4" style="width:25%;float:left">
+                        <img src="img/card7.png" alt="card7" style="width:90%">
+                        <div class="w3-container w3-center">
+                            <p style="font-weight:bold">5k Beginner Training</p>
+                            <p style="margin:-1em;font-style:italic;font-size:80%">running</p>
+                        </div>
+                    </div>
+
+                    <div class="w3-card-4" style="width:25%;float:left">
+                        <img src="img/card8.png" alt="card8" style="width:90%">
+                        <div class="w3-container w3-center">
+                            <p style="font-weight:bold">Going Coastal</p>
+                            <p style="margin:-1em;font-style:italic;font-size:80%">running</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="w3-container" style="margin-bottom:90%">
+                    <div class="w3-card-4" style="width:25%;float:left">
+                        <img src="img/card9.png" alt="card9" style="width:90%">
+                        <div class="w3-container w3-center">
+                            <p style="font-weight:bold">Elliptical Weight Loss</p>
+                            <p style="margin:-1em;font-style:italic;font-size:80%">weight loss</p>
+                        </div>
+                    </div>
+
+                    <div class="w3-card-4" style="width:25%;float:left">
+                        <img src="img/card10.png" alt="card10" style="width:90%">
+                        <div class="w3-container w3-center">
+                            <p style="font-weight:bold">Incline Train</p>
+                            <p style="margin:-1em;font-style:italic;font-size:80%">incline trainer</p>
+                        </div>
+                    </div>
+
+                    <div class="w3-card-4" style="width:25%;float:left">
+                        <img src="img/card11.png" alt="card11" style="width:90%">
+                        <div class="w3-container w3-center">
+                            <p style="font-weight:bold">Paris</p>
+                            <p style="margin:-1em;font-style:italic;font-size:80%">running</p>
+                        </div>
+                    </div>
+
+                    <div class="w3-card-4" style="width:25%;float:left">
+                        <img src="img/card12.png" alt="card12" style="width:90%">
+                        <div class="w3-container w3-center">
+                            <p style="font-weight:bold">Lose Weight with Jillian Michaels</p>
+                            <p style="margin:-1em;font-style:italic;font-size:80%">weight loss</p>
+                        </div>
+                    </div>
+                </div>
+
+
+
+                <div style="text-align:center; clear:both;margin:5px;">
+                    <button style="text-align:center;margin:15px; color:white;  clear:both;">VIEW MORE</button>
+                </div>
+            </div>
+
+            <div style="background-color: black; text-align:center;color:white; width:100%;">
+                <blockquote style="border-left-color:black;text-align:left">
+                    <h3 style="padding:10px">
+                        To date I have lost 14 Kilos (30 pounds) and my fitness level is at least the same as
+                        when I was actively engaged in sport (if not better), thanks to iFit and the range and variation
+                        of fitness programs available.
+                    </h3>
                     <footer style="color: #0099ff; font-style:italic">
-                    Graham Lambourne</footer></blockquote>
-             </div>
+                        Graham Lambourne
+                    </footer>
+                </blockquote>
             </div>
 
-    
-         
 
             <div>
-                <h3 style="text-align: center; margin: 30px; " >
-                Get started on your weight loss journey.
-                <button style="margin:10px; color:white">JOIN IFIT TODAY</button>
+                <h3 style="text-align: center; margin: 30px; ">
+                    Get started on your weight loss journey.
+                    <button style="margin:10px; color:white">JOIN IFIT TODAY</button>
                 </h3>
             </div>
 
-            
+    </main>
 
-        </main>
+    <footer>
+        <div>
+            <a href=blog.html style="color:gray">
+                BLOG-VIDEOS
+            </a> /
+            <a href=blog.html style="color:gray">
+                SHOP
+            </a> /
+            <a href=company.html style="color:gray">
+                COMPANY
+            </a> /
+            <a href=press.html style="color:gray">
+                PRESS
+            </a> /
+            <a href=jobs.html style="color:gray">
+                JOBS
+            </a> /
+            <a href=support.html style="color:gray">
+                SUPPORT
+            </a> /
+            <a href=legal.html style="color:gray">
+                LEGAL
+            </a> /
+            <a href=contact.html style="color:gray">
+                CONTACT
+            </a>
 
-
-
-
-
-
-
-
-
-
-        <footer>
-            <div>
-                <a href=blog.html style="color:gray">
-                    BLOG-VIDEOS
-                </a> /
-                <a href=blog.html style="color:gray">
-                    BLOG-VIDEOS
-                </a>
-
-
-            </div>
-            <div style="text-align: right"> Copyright &copy iFit.com, All rights reserved.  Language: English</div>
-           
-        </footer>
-
-
-
-
-    </body>
+            <a href="https://www.facebook.com/ifit" class="fa fa-facebook"></a>
+            <a href="https://twitter.com/iFit" class="fa fa-twitter"></a>
+            <a href="https://plus.google.com/+Ifittechnology" class="fa fa-google"></a>
+            <a href="https://www.pinterest.com/ifit/" class="fa fa-pinterest"></a>
+            <a href="https://www.instagram.com/ifit/" class="fa fa-instagram"></a>
+            <a href="https://www.youtube.com/user/iFitLive" class="fa fa-youtube"></a>
+        </div>
+        <div style="text-align: right"> Copyright &copy iFit.com, All rights reserved.  Language: English</div>
+    </footer>
+</body>
 </html>
